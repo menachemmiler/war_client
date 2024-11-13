@@ -5,6 +5,7 @@ export interface IResources  {
 }
 
 export interface IOrganiz  {
+  _id:string;
   name: string;
   resources: IResources[];
   budget: number;

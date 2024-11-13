@@ -1,4 +1,5 @@
 export interface IAttack {
+    _id: string;
     name: string;
     timeToHit: number;
     idAttacker: string;

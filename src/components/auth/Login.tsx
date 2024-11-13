@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { fetchLogin } from "../../redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { socket } from "../../main";
 
 export default function Login() {
@@ -35,6 +35,8 @@ export default function Login() {
       <button onClick={() => dispatch(fetchLogin({ username, password }))}>
         Login
       </button>
+      <p>dont have account yet?</p>
+      <Link to={"/register"}>create your account now</Link>
     </div>
   );
 }

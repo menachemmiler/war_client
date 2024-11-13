@@ -8,24 +8,22 @@ import Register from "./components/auth/Register";
 
 export default function App() {
   return (
-    <div>
-      <div className="main">
-        <Routes>
-          {/* מסלולים ציבוריים */}
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+    <div className="app">
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
 
-          {/* מסלולים למשתמש רגיל */}
-          <Route
-            path="userPage"
-            element={
-              <ValidateUser>
-                <UserPage />
-              </ValidateUser>
-            }
-          />
-          {/* מסלולים למשתמש admin */}
-          {/* <Route
+        {/* מסלולים למשתמש רגיל */}
+        <Route
+          path="userPage"
+          element={
+            <ValidateUser>
+              <UserPage />
+            </ValidateUser>
+          }
+        />
+        {/* מסלולים למשתמש admin */}
+        {/* <Route
             path="AdminPage"
             element={
               <ValidateAdmin>
@@ -34,10 +32,9 @@ export default function App() {
             }
           /> */}
 
-          {/* ניתוב ברירת מחדל */}
-          <Route path="/" element={<Navigate to={"/login"} />} />
-        </Routes>
-      </div>
+        {/* ניתוב ברירת מחדל */}
+        <Route path="/" element={<Navigate to={"/login"} />} />
+      </Routes>
     </div>
   );
 }

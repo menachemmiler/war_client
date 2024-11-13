@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/store";
 import { fetchRegister } from "../../redux/slices/userSlice";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const dispatch = useAppDispatch();
@@ -38,6 +39,8 @@ export default function Register() {
       >
         Register
       </button>
+      <p>alredy have an account?</p>
+      <Link to={"/login"}>please login!</Link>
     </div>
   );
 }
