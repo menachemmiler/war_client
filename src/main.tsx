@@ -7,7 +7,7 @@ import store from "./redux/store.ts";
 import { BrowserRouter } from "react-router-dom";
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:1212"); // התחברות לשרת
+export const socket = io("http://localhost:2121"); // התחברות לשרת
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

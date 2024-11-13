@@ -6,8 +6,7 @@ export default function Register() {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-
+  const [organiz, setOrganiz] = useState("");
 
   return (
     <div className="register">
@@ -23,10 +22,18 @@ export default function Register() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <input type="checkbox" onClick={() => setIsAdmin(!isAdmin)} />
+      <select
+        onChange={(e) => setOrganiz(e.target.value)}
+        name="organiz"
+        id="organiz"
+      >
+        <option value="il">Israel</option>
+        <option value="us">United States</option>
+        <option value="gb">United Kingdom</option>
+      </select>
       <button
         onClick={() => {
-          dispatch(fetchRegister({ username, password, isAdmin }));
+          dispatch(fetchRegister({ username, password, organiz }));
         }}
       >
         Register

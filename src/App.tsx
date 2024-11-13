@@ -1,16 +1,14 @@
-import Nav from "./components/Nav";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
 import UserPage from "./components/pages/UserPage";
 import AdminPage from "./components/pages/AdminPage";
-import ValidateUser from "./components/guards/validateUser";
 import ValidateAdmin from "./components/guards/ValidateAdmin";
+import ValidateUser from "./components/guards/ValidateUser";
+import Register from "./components/auth/Register";
 
 export default function App() {
   return (
     <div>
-      <Nav />
       <div className="main">
         <Routes>
           {/* מסלולים ציבוריים */}
@@ -27,14 +25,14 @@ export default function App() {
             }
           />
           {/* מסלולים למשתמש admin */}
-          <Route
+          {/* <Route
             path="AdminPage"
             element={
               <ValidateAdmin>
                 <AdminPage />
               </ValidateAdmin>
             }
-          />
+          /> */}
 
           {/* ניתוב ברירת מחדל */}
           <Route path="/" element={<Navigate to={"/login"} />} />

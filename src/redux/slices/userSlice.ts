@@ -17,7 +17,7 @@ export const fetchLogin = createAsyncThunk(
   "user/login",
   async (user: { username: string; password: string }, thunkApi) => {
     try {
-      const res = await fetch("http://localhost:1212/api/users/login", {
+      const res = await fetch("http://localhost:2121/api/users/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -30,6 +30,7 @@ export const fetchLogin = createAsyncThunk(
       }
       const data = await res.json();
       localStorage.setItem("Authorization", data.token);
+      console.log(33, { data });
       return thunkApi.fulfillWithValue(data);
     } catch (err: any) {
       return thunkApi.rejectWithValue(
@@ -42,12 +43,12 @@ export const fetchLogin = createAsyncThunk(
 export const fetchRegister = createAsyncThunk(
   "user/register",
   async (
-    user: { username: string; password: string; isAdmin: boolean },
+    user: { username: string; password: string; organiz: string },
     thunkApi
   ) => {
     try {
       console.log(JSON.stringify(user));
-      const res = await fetch("http://localhost:1212/api/users/register", {
+      const res = await fetch("http://localhost:2121/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +76,7 @@ export const getProfile = createAsyncThunk(
   "user/profile",
   async (_, thunkApi) => {
     try {
-      const res = await fetch("http://localhost:1212/api/users/profile", {
+      const res = await fetch("http://localhost:2121/api/users/profile", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -99,27 +100,24 @@ export const getProfile = createAsyncThunk(
   }
 );
 
-export const adminData = createAsyncThunk(
-  "user/admin",
-  async (_, thunkApi) => {
-    try {
-      const res = await fetch("http://localhost:1212/api/admin", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("Authorization")!,
-        },
-      });
-      if (res.status != 200) {
-        return thunkApi.rejectWithValue(`Error ${(res as any).message}`);
-      }
-      const data = await res.json();
-      return thunkApi.fulfillWithValue(data);
-    } catch (err: any) {
-      return thunkApi.rejectWithValue(`Error${err.message}`);
+export const adminData = createAsyncThunk("user/admin", async (_, thunkApi) => {
+  try {
+    const res = await fetch("http://localhost:2121/api/admin", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("Authorization")!,
+      },
+    });
+    if (res.status != 200) {
+      return thunkApi.rejectWithValue(`Error ${(res as any).message}`);
     }
+    const data = await res.json();
+    return thunkApi.fulfillWithValue(data);
+  } catch (err: any) {
+    return thunkApi.rejectWithValue(`Error${err.message}`);
   }
-);
+});
 
 const userSlice = createSlice({
   name: "user",
