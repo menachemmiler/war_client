@@ -14,7 +14,11 @@ export default function Login() {
   useEffect(() => {
     if (user?._id) {
       socket.emit("login");
-      navigate("/userPage");
+      if (user.organiz.name.includes(" ")) {
+        navigate("/ProtectionPage");
+        return;
+      }
+      navigate("/AttackPage");
     }
   }, [user, navigate]);
 

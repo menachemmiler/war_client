@@ -4,7 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { DataStatus, userState } from "../../types/redux";
-import { IUser } from "../../types/user";
+import { IUser } from "../../models/user";
 
 const initialState: userState = {
   error: null,
@@ -118,6 +118,8 @@ export const adminData = createAsyncThunk("user/admin", async (_, thunkApi) => {
     return thunkApi.rejectWithValue(`Error${err.message}`);
   }
 });
+
+
 
 const userSlice = createSlice({
   name: "user",
