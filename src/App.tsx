@@ -5,8 +5,8 @@ import AttackPage from "./components/pages/AttackPage";
 import ProtectionPage from "./components/pages/ProtectionPage";
 import { useEffect } from "react";
 import { socket } from "./socket/io";
-import { updateAttack, updateUser } from "./redux/slices/userSlice";
-import { useAppDispatch, useAppSelector } from "./redux/store";
+import {  updateUser } from "./redux/slices/userSlice";
+import { useAppDispatch } from "./redux/store";
 
 export default function App() {
   const dispatch = useAppDispatch();

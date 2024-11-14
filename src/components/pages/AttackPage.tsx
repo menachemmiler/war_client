@@ -6,7 +6,8 @@ import NavAttack from "../NavAttack";
 import { useNavigate } from "react-router-dom";
 import allMissile from "../../utils/allMissile";
 import { socket } from "../../socket/io";
-import {  getAllMyAttack, updateAttack } from "../../redux/slices/attackSlice";
+import { getAllMyAttack, updateAttack } from "../../redux/slices/attackSlice";
+import { updateResources } from "../../redux/slices/userSlice";
 
 export default function AttackPage() {
   const { user: user } = useAppSelector((state) => state.user);
@@ -22,6 +23,10 @@ export default function AttackPage() {
       return navigate("/login");
     }
     dispatch(getAllMyAttack());
+    socket.on(`updateResources-${user._id}`, (resources: IResources) => {
+      console.log("updateResources", { resources });
+      dispatch(updateResources(resources));
+    });
   }, []);
 
   const handleSendMissile = (missileNAme: string) => {

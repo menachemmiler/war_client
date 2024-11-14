@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { DataStatus, userState } from "../../types/redux";
 import { IUser } from "../../models/user";
+import { IResources } from "../../models/organiz";
 
 const initialState: userState = {
   error: null,
@@ -12,8 +13,6 @@ const initialState: userState = {
   user: null,
   allAttack: [],
 };
-
-
 
 export const fetchLogin = createAsyncThunk(
   "user/login",
@@ -132,7 +131,9 @@ const userSlice = createSlice({
     updateUser: (state, action) => {
       state.user = action.payload;
     },
-
+    updateResources(state, action) {
+      state.user!.organiz.resources = action.payload;
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<any>) => {
     //לטפל ב-טייפ פה
@@ -164,6 +165,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateUser, logout } = userSlice.actions;
+export const { updateUser, logout, updateResources } = userSlice.actions;
 
 export default userSlice;

@@ -5,7 +5,6 @@ import NavProtection from "../NavProtection";
 import { useNavigate } from "react-router-dom";
 import allMissile from "../../utils/allMissile";
 import { socket } from "../../socket/io";
-import { IAttack } from "../../models/attack";
 import { getAllMyAttack, updateAttack } from "../../redux/slices/attackSlice";
 
 export default function ProtectionPage() {
@@ -23,6 +22,13 @@ export default function ProtectionPage() {
       console.log("יש התקפה לאיזור זה");
       console.log({ attack });
       dispatch(updateAttack(attack));
+      console.log(attack.timeToHit);
+
+      // setInterval(() => {
+      //   // attack.timeToHit -= 1;
+      //   console.log(attack.timeToHit);
+      //   // dispatch(updateAttack(attack));
+      // }, attack.timeToHit * 5);
     });
     dispatch(getAllMyAttack());
   }, []);
