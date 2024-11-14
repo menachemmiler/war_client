@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { fetchLogin } from "../../redux/slices/userSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { socket } from "../../main";
+import { socket } from "../../socket/io";
 
 export default function Login() {
   const dispatch = useAppDispatch();

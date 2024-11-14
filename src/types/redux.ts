@@ -2,7 +2,6 @@ import { IAttack } from "../models/attack";
 import { IOrganiz } from "../models/organiz";
 import { IUser } from "../models/user";
 
-
 export enum DataStatus {
   LOADING = "LOADING",
   SUCCESS = "SUCCESS",
@@ -14,7 +13,7 @@ export interface userState {
   error: string | null;
   status: DataStatus;
   user: null | IUser;
-  data?: any;
+  allAttack?: any;
 }
 
 export interface organizState {
@@ -24,11 +23,9 @@ export interface organizState {
   data?: any;
 }
 
-
 export interface attackState {
   error: string | null;
   status: DataStatus;
   attack: null | IAttack[];
   data?: any;
 }
-

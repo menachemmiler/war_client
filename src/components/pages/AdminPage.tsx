@@ -4,12 +4,11 @@ import { adminData } from "../../redux/slices/userSlice";
 
 export default function AdminPage() {
   const { user: user } = useAppSelector((state) => state.user);
-  const { data } = useAppSelector((state) => state.user);
+  const { allAttack: data } = useAppSelector((state) => state.user);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   console.log({ data });
-
 
   useEffect(() => {
     dispatch(adminData());

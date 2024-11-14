@@ -3,8 +3,20 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import AttackPage from "./components/pages/AttackPage";
 import ProtectionPage from "./components/pages/ProtectionPage";
+import { useEffect } from "react";
+import { socket } from "./socket/io";
+import { updateAttack, updateUser } from "./redux/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "./redux/store";
 
 export default function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    socket.on("updateUser", (newUSer) => {
+      dispatch(updateUser(newUSer));
+    });
+  }, []);
+
   return (
     <div className="app">
       <Routes>

@@ -5,13 +5,12 @@ import {
 } from "@reduxjs/toolkit";
 import { DataStatus, userState } from "../../types/redux";
 import { IUser } from "../../models/user";
-import { redirect } from "react-router-dom";
 
 const initialState: userState = {
   error: null,
   status: DataStatus.IDLE,
   user: null,
-  data: null,
+  allAttack: [],
 };
 
 export const fetchLogin = createAsyncThunk(
@@ -120,8 +119,6 @@ export const adminData = createAsyncThunk("user/admin", async (_, thunkApi) => {
   }
 });
 
-
-
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -133,20 +130,25 @@ const userSlice = createSlice({
     updateUser: (state, action) => {
       state.user = action.payload;
     },
+    updateAttack: (state, action) => {
+      console.log(134, { action });
+      state.allAttack.push(action.payload);
+      console.log(state.allAttack);
+    },
   },
-  extraReducers: (builder: ActionReducerMapBuilder<any>) => {//לטפל ב-טייפ פה
+  extraReducers: (builder: ActionReducerMapBuilder<any>) => {
+    //לטפל ב-טייפ פה
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.status = DataStatus.LOADING;
         state.error = null;
         state.user = null;
       })
-      .addCase(fetchLogin.fulfilled, (state , action) => {
+      .addCase(fetchLogin.fulfilled, (state, action) => {
         // console.log({ action });
         state.status = DataStatus.SUCCESS;
         state.error = null;
         state.user = action.payload as unknown as IUser;
-        // console.log(state.user);
       })
       .addCase(fetchLogin.rejected, (state, action) => {
         state.status = DataStatus.FAILED;
@@ -164,6 +166,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateUser, logout } = userSlice.actions;
+export const { updateUser, logout, updateAttack } = userSlice.actions;
 
 export default userSlice;
