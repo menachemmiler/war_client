@@ -70,6 +70,7 @@ export default function ProtectionPage() {
               <th>name</th>
               <th>time to hit</th>
               <th>status</th>
+              <th>to intercept</th>
             </tr>
           </thead>
           <tbody>
@@ -78,6 +79,7 @@ export default function ProtectionPage() {
                 <td>{attack.name}</td>
                 <td>{attack.timeToHit}</td>
                 <td>{attack.status}</td>
+                <td onClick={() => socket.emit("intercept", {...attack, idIntercepted: user?._id})}><button>❌</button></td>
               </tr>
             ))}
           </tbody>
