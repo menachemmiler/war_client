@@ -133,14 +133,14 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
   },
-  extraReducers: (builder: ActionReducerMapBuilder<userState>) => {
+  extraReducers: (builder: ActionReducerMapBuilder<any>) => {//לטפל ב-טייפ פה
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.status = DataStatus.LOADING;
         state.error = null;
         state.user = null;
       })
-      .addCase(fetchLogin.fulfilled, (state, action) => {
+      .addCase(fetchLogin.fulfilled, (state , action) => {
         // console.log({ action });
         state.status = DataStatus.SUCCESS;
         state.error = null;

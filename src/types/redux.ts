@@ -1,4 +1,6 @@
-import { IUser } from "./user";
+import { IOrganiz } from "../models/organiz";
+import { IUser } from "../models/user";
+
 
 export enum DataStatus {
   LOADING = "LOADING",
@@ -11,6 +13,13 @@ export interface userState {
   error: string | null;
   status: DataStatus;
   user: null | IUser;
+  data?: any;
+}
+
+export interface organizState {
+  error: string | null;
+  status: DataStatus;
+  organiz: null | string[];
   data?: any;
 }
 

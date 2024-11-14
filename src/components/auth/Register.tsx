@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { useAppDispatch } from "../../redux/store";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { fetchRegister } from "../../redux/slices/userSlice";
 import { Link } from "react-router-dom";
+import { DataStatus } from "../../types/redux";
+import { getAllOrganiz } from "../../redux/slices/organizSlice";
 
 export default function Register() {
   const dispatch = useAppDispatch();
+  const { organiz: allOrganizName , status: organizStatus} = useAppSelector((state) => state.organiz);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [organiz, setOrganiz] = useState("");
+
+  useEffect(() => {
+    dispatch(getAllOrganiz());
+  }, [])
 
   return (
     <div className="register">
@@ -28,9 +35,16 @@ export default function Register() {
         name="organiz"
         id="organiz"
       >
-        <option value="il">Israel</option>
-        <option value="us">United States</option>
-        <option value="gb">United Kingdom</option>
+        {
+          organizStatus == DataStatus.LOADING ? (
+            <option>Loading...</option>
+          ) : (
+            allOrganizName?.map((organiz) => (
+              <option key={organiz} value={organiz}>
+                {organiz}
+              </option>
+            ))
+          )}
       </select>
       <button
         onClick={() => {
