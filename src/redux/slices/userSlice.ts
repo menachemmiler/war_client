@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import { DataStatus, userState } from "../../types/redux";
 import { IUser } from "../../models/user";
+import { redirect } from "react-router-dom";
 
 const initialState: userState = {
   error: null,
@@ -163,6 +164,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateUser } = userSlice.actions;
+export const { updateUser, logout } = userSlice.actions;
 
 export default userSlice;

@@ -1,3 +1,4 @@
+import { IAttack } from "../models/attack";
 import { IOrganiz } from "../models/organiz";
 import { IUser } from "../models/user";
 
@@ -23,4 +24,11 @@ export interface organizState {
   data?: any;
 }
 
+
+export interface attackState {
+  error: string | null;
+  status: DataStatus;
+  attack: null | IAttack[];
+  data?: any;
+}
 

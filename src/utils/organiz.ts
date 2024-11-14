@@ -1,3 +1,0 @@
-// const allOrganiz = [];
-
-// export allOrganiz;

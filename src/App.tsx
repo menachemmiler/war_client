@@ -12,19 +12,6 @@ export default function App() {
         <Route path="register" element={<Register />} />
         <Route path="AttackPage" element={<AttackPage />} />
         <Route path="ProtectionPage" element={<ProtectionPage />} />
-
-
-  
-
-        {/* <Route
-          path="userPage"
-          element={
-            <ValidateUser>
-              <UserPage />
-            </ValidateUser>
-          }
-        /> */}
-
         <Route path="/" element={<Navigate to={"/login"} />} />
       </Routes>
     </div>

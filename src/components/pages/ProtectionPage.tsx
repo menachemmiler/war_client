@@ -1,11 +1,13 @@
 import { IResources } from "../../models/organiz";
 import { useAppSelector } from "../../redux/store";
+import Nav from "../Nav";
 
 export default function ProtectionPage() {
   const { user: user } = useAppSelector((state) => state.user);
 
   return (
     <div className="protectionpage">
+      <Nav />
       <h1>ProtectionPage</h1>
       <h1>{`username: ${user?.username}`}</h1>
       <h2>{`organiz.name: ${user?.organiz.name}`}</h2>
