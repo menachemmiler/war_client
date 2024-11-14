@@ -83,7 +83,7 @@ export default function AttackPage() {
                   }
                 </td>
                 <td>
-                  <button onClick={() => handleSendMissile(resource.name)}>
+                  <button disabled={resource.amount <= 0} onClick={() => handleSendMissile(resource.name)}>
                     ⬆️
                   </button>
                 </td>
