@@ -22,13 +22,6 @@ export default function ProtectionPage() {
       console.log("יש התקפה לאיזור זה");
       console.log({ attack });
       dispatch(updateAttack(attack));
-      console.log(attack.timeToHit);
-
-      // setInterval(() => {
-      //   // attack.timeToHit -= 1;
-      //   console.log(attack.timeToHit);
-      //   // dispatch(updateAttack(attack));
-      // }, attack.timeToHit * 5);
     });
     dispatch(getAllMyAttack());
   }, []);
