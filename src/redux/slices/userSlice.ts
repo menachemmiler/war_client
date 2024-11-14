@@ -13,6 +13,8 @@ const initialState: userState = {
   allAttack: [],
 };
 
+
+
 export const fetchLogin = createAsyncThunk(
   "user/login",
   async (user: { username: string; password: string }, thunkApi) => {
@@ -130,11 +132,7 @@ const userSlice = createSlice({
     updateUser: (state, action) => {
       state.user = action.payload;
     },
-    updateAttack: (state, action) => {
-      console.log(134, { action });
-      state.allAttack.push(action.payload);
-      console.log(state.allAttack);
-    },
+
   },
   extraReducers: (builder: ActionReducerMapBuilder<any>) => {
     //לטפל ב-טייפ פה
@@ -166,6 +164,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { updateUser, logout, updateAttack } = userSlice.actions;
+export const { updateUser, logout } = userSlice.actions;
 
 export default userSlice;

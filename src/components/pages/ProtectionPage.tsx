@@ -5,12 +5,12 @@ import NavProtection from "../NavProtection";
 import { useNavigate } from "react-router-dom";
 import allMissile from "../../utils/allMissile";
 import { socket } from "../../socket/io";
-import { updateAttack } from "../../redux/slices/userSlice";
 import { IAttack } from "../../models/attack";
+import { getAllMyAttack, updateAttack } from "../../redux/slices/attackSlice";
 
 export default function ProtectionPage() {
   const { user: user } = useAppSelector((state) => state.user);
-  const { allAttack } = useAppSelector((state) => state.user.allAttack);
+  const { attack: allAttack } = useAppSelector((state) => state.attack);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -18,13 +18,13 @@ export default function ProtectionPage() {
     if (!user?._id) {
       return navigate("/login");
     }
-    console.log(`attack-${user?.area}`);
+    // console.log(`attack-${user?.area}`);
     socket.on(`attack-${user?.area}`, (attack) => {
       console.log("יש התקפה לאיזור זה");
+      console.log({ attack });
       dispatch(updateAttack(attack));
     });
-    // console.log({ allAttack });
-    // console.log(Object.keys(allAttack));
+    dispatch(getAllMyAttack());
   }, []);
 
   return (
@@ -63,14 +63,27 @@ export default function ProtectionPage() {
       </div>
 
       {/* show all attacks */}
-      {allAttack &&
-        allAttack.map((attack: IAttack) => (
-          <div key={attack._id}>
-            <h3>{attack.name}</h3>
-            <h3>{attack.timeToHit}</h3>
-            <h3>{attack.area}</h3>
-          </div>
-        ))}
+      <div className="table">
+        <table>
+          <caption>התקפות על האזור</caption>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>time to hit</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allAttack?.map((attack) => (
+              <tr key={attack._id}>
+                <td>{attack.name}</td>
+                <td>{attack.timeToHit}</td>
+                <td>{attack.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

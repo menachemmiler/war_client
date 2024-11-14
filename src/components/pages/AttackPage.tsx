@@ -6,10 +6,12 @@ import NavAttack from "../NavAttack";
 import { useNavigate } from "react-router-dom";
 import allMissile from "../../utils/allMissile";
 import { socket } from "../../socket/io";
+import {  getAllMyAttack, updateAttack } from "../../redux/slices/attackSlice";
 
 export default function AttackPage() {
   const { user: user } = useAppSelector((state) => state.user);
-  const { data } = useAppSelector((state) => state.user.allAttack);
+  const { attack } = useAppSelector((state) => state.attack);
+
   const [area, setArea] = useState("");
   const dispatch = useAppDispatch();
 
@@ -19,6 +21,7 @@ export default function AttackPage() {
     if (!user?._id) {
       return navigate("/login");
     }
+    dispatch(getAllMyAttack());
   }, []);
 
   const handleSendMissile = (missileNAme: string) => {
@@ -32,11 +35,15 @@ export default function AttackPage() {
       timeToHit: allMissile.find((missile) => missile.name === missileNAme)
         ?.speed!,
       area: area,
+      status: "sent",
     };
-    // dispatch(updateData())
-    // console.log({ attack });
+    socket.emit("attack", attack);
 
-    socket.emit(`attack`, attack);
+    socket.on(`attack-${user?._id}`, (attackFromServer) => {
+      console.log("אתה תקפת עכשיו!");
+      console.log({ attackFromServer });
+      dispatch(updateAttack(attackFromServer));
+    });
   };
 
   return (
@@ -75,6 +82,28 @@ export default function AttackPage() {
                     ⬆️
                   </button>
                 </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* all my attack */}
+      <div className="table">
+        <table>
+          <caption>התקפות שלי</caption>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>time to hit</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {attack?.map((attack) => (
+              <tr key={attack._id}>
+                <td>{attack.name}</td>
+                <td>{attack.timeToHit}</td>
+                <td>{attack.status}</td>
               </tr>
             ))}
           </tbody>

@@ -3,11 +3,13 @@ import userSlice from "./slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import organizSlice from "./slices/organizSlice";
+import attackSlice from "./slices/attackSlice";
 
 const store = configureStore({
   reducer: {
     user: userSlice.reducer,
     organiz: organizSlice.reducer,
+    attack: attackSlice.reducer,
   },
 });
 
